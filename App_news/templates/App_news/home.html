@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+<!-- Adding title -->
+{% block title %}
+    <title>Advarisk_test</title>
+{% endblock title %}
+
+{% block content %}
+    <div class = 'container'>
+      <!-- Adding searching form -->
+        <form method = 'POST'>
+            {% csrf_token %}
+            <input type="text"  name="Search_parameter" placeholder="Type your choice here...">
+            <button type="submit" >Search</button>
+        </form> 
+
+        <br>
+        <!-- Adding History button  -->
+        <a class="btn btn-outline-info" href="{% url 'History' %}" role="button">History</a>
+        
+        <!-- If we searched something, show refresh button-->
+        {% if query.query %}
+          <form method = 'POST'>
+            {% csrf_token %}
+            <input type="hidden" name="Search_parameter" value={{query.query}}>
+            <input type="hidden" name="since" value={{query.to}}>
+            <button type="submit" class="btn btn-outline-success" >Refresh</button>
+          </form>
+        {% endif %}
+        <br>
+        
+        <!-- Display API Response -->
+        {% for element in data %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{element.urlToImage}}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title">{{element.title}}</h5>
+                  <p class="card-text">{{element.description}}</p>
+                  <p class="card-text">{{element.publishedAt}}</p>
+                  <a href="{{element.url}}" target="_blank" class="btn btn-primary">Read full article</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %} 
+
+        <!--
+      
+        {% if data.has_previous %}
+        <form method = 'POST'>
+            {% csrf_token %}
+            <p>{{query.query}}</p>
+            <input type="hidden" name="page" value={{data.previous_page_number}}>
+            <input type="hidden" name="Search_parameter" value={{query.query}}>
+            <button type="submit" >Previous Page</button>
+        </form>
+        {% endif %}
+
+        
+        {% if data.has_next %}
+        <form method = 'POST'>
+            {% csrf_token %}
+            <p>{{query.query}}</p>
+            <input type="hidden" name="page" value={{data.next_page_number}}>
+            <input type="hidden" name="Search_parameter" value={{query.query}}>
+            <button type="submit" >Next Page</button>
+        </form>
+        {% endif %}
+      -->
+    </div>
+{% endblock content %}
+
+  
+

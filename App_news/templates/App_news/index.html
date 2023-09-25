@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+<!-- Adding title -->
+{% block title %}
+    <title>Home-Advarisk_test</title>
+{% endblock title %}
+
+
+{% block content %}
+    <div class = 'container'>
+        <div class="row mt-3">
+            <h1><center><a href="{% url 'Homepage' %}"><button type="button" class="btn btn-outline-success">Let's Get Started</button></a></center></h1>
+        </div>
+    </div>
+{% endblock content %}

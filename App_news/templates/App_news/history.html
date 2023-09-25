@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+<!--Adding title -->
+{% block title %}
+    <title>History-Advarisk_test</title>
+{% endblock title %}
+
+{% block content %}
+    <div class = 'container'>
+        
+        <div class="row mt-3">
+            <!-- Display History -->
+            {% for searched_query in history %}
+                <p>{{searched_query}}</p>
+            {% endfor %}
+            
+            <!-- Display Go back button -->
+            <h1><center><a href="{% url 'Homepage' %}"><button type="button" class="btn btn-outline-success">Go Back</button></a></center></h1>
+        </div>
+    </div>
+{% endblock content %}

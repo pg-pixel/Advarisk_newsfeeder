@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags%}
+
+<!-- Adding title -->
+{% block title %}
+    <title>Register-us</title>
+{% endblock title %}
+
+{% block content %}
+    <div class = 'container'>
+        </br>
+        <h2>Welcome to Advarisk_test. Let's Register</h2>
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{msg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method = 'POST' class='col-6 mt-5'>
+            {% csrf_token %}
+            {{registration_form|crispy}}
+            <button class="btn btn-success mb-5" type='submit'>Register</button>
+        </form>
+        
+    </div>
+{% endblock content %}
